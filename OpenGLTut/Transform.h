@@ -20,11 +20,11 @@ public:
 	void SetRotation(const glm::vec3& Rot) { rotation = Rot; }
 	void SetScale(const glm::vec3& Scale) { scale = Scale; }
 
+
+private:
 	float angle;
 	glm::vec3 position;
 	glm::vec3 rotation;
 	glm::vec3 scale;
 	glm::vec2 u_v;
-private:
-
 };

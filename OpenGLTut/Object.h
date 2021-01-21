@@ -48,9 +48,9 @@ bool Object::HasComponent()
 template<typename Component>
 void Object::AddComponent()
 {
-	if (HasComponent<>()) {
-		return;
-	}
+	//if (HasComponent<>()) {
+	//	return;
+	//}
 	Component* temp = new Component();
 	dynamic_cast<Component*>(temp)->SetOwner(this);
 	this->mVcomponetList.push_back(temp);
