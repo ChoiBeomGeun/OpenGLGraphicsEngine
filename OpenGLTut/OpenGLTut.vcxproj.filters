@@ -22,6 +22,9 @@
     <Filter Include="소스 파일\Core\Graphics">
       <UniqueIdentifier>{92fc5fbf-8919-4015-8e79-df716de1037d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\Core\Systems">
+      <UniqueIdentifier>{450afdf5-a0a0-473b-b09e-2f2fb3fca0ec}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -94,6 +97,36 @@
     </ClInclude>
     <ClInclude Include="Utility.hpp">
       <Filter>소스 파일\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Mesh.h">
+      <Filter>소스 파일\Core\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Model.h">
+      <Filter>소스 파일\Core\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera.h">
+      <Filter>소스 파일\Core\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Types.h">
+      <Filter>소스 파일\Core\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="EntityManager.hpp">
+      <Filter>소스 파일\Core\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="ComponentManager.hpp">
+      <Filter>소스 파일\Core\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="ComponentVector.hpp">
+      <Filter>소스 파일\Core\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="Coordinator.hpp">
+      <Filter>소스 파일\Core\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="SystemManager.hpp">
+      <Filter>소스 파일\Core\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="System.hpp">
+      <Filter>소스 파일\Core\Systems</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
