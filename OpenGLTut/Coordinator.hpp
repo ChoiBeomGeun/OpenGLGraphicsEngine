@@ -73,7 +73,11 @@ public:
 		return mSystemManager->RegisterSystem<T>();
 	}
 
-
+	template<typename T>
+	void AddEntityToSystem(Entity entity)
+	{
+		mSystemManager->AddEntityToSystem<T>(entity);
+	}
 
 private:
 	std::unique_ptr<ComponentManager> mComponentManager;

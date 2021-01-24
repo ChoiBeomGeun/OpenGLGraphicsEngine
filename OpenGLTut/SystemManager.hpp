@@ -34,7 +34,12 @@ public:
 		}
 	}
 
-
+	template<typename T>
+	void AddEntityToSystem(Entity entity)
+	{
+		const char* typeName = typeid(T).name();
+		mSystems[typeName]->mEntities.insert(entity);
+	}
 private:
 
 	std::unordered_map<const char*, std::shared_ptr<System>> mSystems{};

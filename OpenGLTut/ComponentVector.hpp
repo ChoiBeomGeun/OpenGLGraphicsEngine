@@ -1,5 +1,4 @@
 #pragma once
-#pragma once
 
 #include "Types.h"
 #include <array>
@@ -27,7 +26,7 @@ public:
 		size_t newIndex = mSize;
 		mEntityToIndexMap[entity] = newIndex;
 		mIndexToEntityMap[newIndex] = entity;
-		mComponentVector[newIndex] = component;
+		mComponentVector.push_back(component);
 		++mSize;
 	}
 

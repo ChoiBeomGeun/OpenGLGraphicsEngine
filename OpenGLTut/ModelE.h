@@ -1,4 +1,5 @@
 #pragma once
+#define STB_IMAGE_IMPLEMENTATION
 #include <glad/glad.h> 
 
 #include <glm/glm.hpp>
@@ -21,7 +22,7 @@ using namespace std;
 
 unsigned int TextureFromFile(const char* path, const string& directory, bool gamma = false);
 
-class Model
+class ModelE
 {
 public:
     // model data 
@@ -31,18 +32,15 @@ public:
     bool gammaCorrection;
 
     // constructor, expects a filepath to a 3D model.
-    Model(string const& path, bool gamma = false) : gammaCorrection(gamma)
+    ModelE(string const& path, bool gamma = false) : gammaCorrection(gamma)
     {
         loadModel(path);
     }
-
-    // draws the model, and thus all its meshes
     void Draw(Shader& shader)
     {
         for (unsigned int i = 0; i < meshes.size(); i++)
             meshes[i].Draw(shader);
     }
-
 private:
     // loads a model with supported ASSIMP extensions from file and stores the resulting meshes in the meshes vector.
     void loadModel(string const& path)

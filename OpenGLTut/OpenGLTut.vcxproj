@@ -175,8 +175,10 @@
     <ClInclude Include="external\imgui\imstb_textedit.h" />
     <ClInclude Include="external\imgui\imstb_truetype.h" />
     <ClInclude Include="Mesh.h" />
-    <ClInclude Include="Model.h" />
+    <ClInclude Include="ModelE.h" />
     <ClInclude Include="Object.h" />
+    <ClInclude Include="RenderSystem.cpp" />
+    <ClInclude Include="RenderSystem.h" />
     <ClInclude Include="System.hpp" />
     <ClInclude Include="SystemManager.hpp" />
     <ClInclude Include="Transform.h" />

@@ -1,10 +1,10 @@
-#define STB_IMAGE_IMPLEMENTATION
+
 #include <glad/glad.h>
 #include <filesystem>
 #include <iostream>
 #include "external/imgui/imgui.h"
 #include "external/imgui/imgui_impl_opengl3.h"
-#include "external/imgui/imgui_impl_glfw.h";
+#include "external/imgui/imgui_impl_glfw.h"
 
 #include <GLFW/glfw3.h>
 
@@ -15,10 +15,32 @@
 #include "Object.h"
 #include "Transform.h"
 #include "Shader.h"
-#include "Model.h"
+
 #include "Camera.h"
 #include "ComponentVector.hpp"
 #include "Coordinator.hpp"
+#include "RenderSystem.h"
+Coordinator coordinator;
+void EntityInit()
+{
+    coordinator.Init();
+    coordinator.RegisterComponent<Camera>();
+    coordinator.RegisterComponent<Transform>();
+
+    Entity entity = coordinator.CreateEntity();
+
+    coordinator.AddComponent(
+        entity,
+        Transform{ 
+           glm::vec3(0,0,0),
+           glm::vec3(0,0,0),
+           glm::vec3(0,0,0)
+        });
+
+    auto renderSystem = coordinator.RegisterSystem<RenderSystem>();
+
+    coordinator.AddEntityToSystem<RenderSystem>(entity);
+}
 void IMGUI_Init(GLFWwindow* window, const char* version);
 void IMGUI_Update(GLFWwindow* window);
 void processInput(GLFWwindow *window);
@@ -36,13 +58,12 @@ bool firstMouse = true;
 float deltaTime = 0.0f;
 float lastFrame = 0.0f;
 Camera camera(glm::vec3(0.0f, 0.0f, 3.0f));
-Coordinator coordinator;
+
 ImVec4 clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
+
 int main()
 {
-    coordinator.Init();
-    coordinator.RegisterComponent<Transform>();
-
+    EntityInit();
 
 
 	glfwInit();
@@ -80,7 +101,7 @@ int main()
 
     Shader ourShader("Resources/vertexShader.vs", "Resources/fragmentShader.fs"); // you can name your shader files however you like
 
-    Model ourModel("Resources/backpack/backpack.obj");
+  //  Model ourModel("Resources/backpack/backpack.obj");
 
     gladLoadGL();
 #if _DEBUG
@@ -89,21 +110,20 @@ int main()
 	while (!glfwWindowShouldClose(window))
 	{
 		processInput(window);
-        glClearColor(0.05f, 0.05f, 0.05f, 1.0f);
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-        // render container
-        ourShader.use();
-        glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
-        glm::mat4 view = camera.GetViewMatrix();
-        ourShader.setMat4("projection", projection);
-        ourShader.setMat4("view", view);
 
-        // render the loaded model
-        glm::mat4 model = glm::mat4(1.0f);
-        model = glm::translate(model, glm::vec3(0.0f, 0.0f, 0.0f)); // translate it down so it's at the center of the scene
-        model = glm::scale(model, glm::vec3(1.0f, 1.0f, 1.0f));	// it's a bit too big for our scene, so scale it down
-        ourShader.setMat4("model", model);
-        ourModel.Draw(ourShader);
+        // render container
+        //ourShader.use();
+        //glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
+        //glm::mat4 view = camera.GetViewMatrix();
+        //ourShader.setMat4("projection", projection);
+        //ourShader.setMat4("view", view);
+
+        //// render the loaded model
+        //glm::mat4 model = glm::mat4(1.0f);
+        //model = glm::translate(model, glm::vec3(0.0f, 0.0f, 0.0f)); // translate it down so it's at the center of the scene
+        //model = glm::scale(model, glm::vec3(1.0f, 1.0f, 1.0f));	// it's a bit too big for our scene, so scale it down
+        //ourShader.setMat4("model", model);
+        //ourModel.Draw(ourShader);
 
 #if _DEBUG
         IMGUI_Update(window);
