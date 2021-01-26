@@ -12,34 +12,14 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
-#include "Object.h"
-#include "Transform.h"
-#include "Shader.h"
-
-#include "Camera.h"
-#include "ComponentVector.hpp"
+#include "Transform.hpp"
 #include "Coordinator.hpp"
-#include "RenderSystem.h"
+#include "Camera.hpp"
+
 Coordinator coordinator;
 void EntityInit()
 {
-    coordinator.Init();
-    coordinator.RegisterComponent<Camera>();
-    coordinator.RegisterComponent<Transform>();
-
-    Entity entity = coordinator.CreateEntity();
-
-    coordinator.AddComponent(
-        entity,
-        Transform{ 
-           glm::vec3(0,0,0),
-           glm::vec3(0,0,0),
-           glm::vec3(0,0,0)
-        });
-
-    auto renderSystem = coordinator.RegisterSystem<RenderSystem>();
-
-    coordinator.AddEntityToSystem<RenderSystem>(entity);
+   
 }
 void IMGUI_Init(GLFWwindow* window, const char* version);
 void IMGUI_Update(GLFWwindow* window);
@@ -63,7 +43,7 @@ ImVec4 clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
 
 int main()
 {
-    EntityInit();
+
 
 
 	glfwInit();
@@ -93,24 +73,45 @@ int main()
         return -1;
     }
     // tell stb_image.h to flip loaded texture's on the y-axis (before loading model).
-    stbi_set_flip_vertically_on_load(true);
+
+    //stbi_set_flip_vertically_on_load(true);
 
     // configure global opengl state
     // -----------------------------
     glEnable(GL_DEPTH_TEST);
 
-    Shader ourShader("Resources/vertexShader.vs", "Resources/fragmentShader.fs"); // you can name your shader files however you like
-
-  //  Model ourModel("Resources/backpack/backpack.obj");
-
     gladLoadGL();
+    
+    coordinator.Init();
+    coordinator.RegisterComponent<Camera>();
+    coordinator.RegisterComponent<Transform>();
+    coordinator.RegisterComponent<Model>();
+    Entity entity = coordinator.CreateEntity();
+    Transform tr = Transform{
+        glm::vec3(0,0,0),
+        glm::vec3(0,0,0),
+        glm::vec3(1,1,1)
+    };
+
+    Model md = Model("Resources/backpack/backpack.obj");
+    coordinator.AddComponent(entity, &md);
+    coordinator.AddComponent(entity, &tr);
+
+    auto renderSystem = coordinator.RegisterSystem<RendererSystem>();
+
+    coordinator.AddEntityToSystem<RendererSystem>(entity);
+
+    renderSystem->Init();
+
 #if _DEBUG
     IMGUI_Init(window, "#version 130");
 #endif
 	while (!glfwWindowShouldClose(window))
 	{
 		processInput(window);
-
+        glClearColor(0.05f, 0.05f, 0.05f, 1.0f);
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+        renderSystem->Update(1.0f);
         // render container
         //ourShader.use();
         //glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);

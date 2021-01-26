@@ -1,7 +1,7 @@
 #pragma once
 
 #include "System.hpp"
-#include "Types.h"
+#include "Types.hpp"
 #include <cassert>
 #include <memory>
 #include <unordered_map>

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Types.h"
+#include "Types.hpp"
 #include <array>
 #include <cassert>
 #include <unordered_map>
@@ -18,7 +18,7 @@ template<typename T>
 class ComponentVector : public IComponentVector
 {
 public:
-	void InsertData(Entity entity, T component)
+	void InsertData(Entity entity, T *component)
 	{
 		assert(mEntityToIndexMap.find(entity) == mEntityToIndexMap.end() && "Component added to same entity more than once.");
 
@@ -50,7 +50,7 @@ public:
 		--mSize;
 	}
 
-	T& GetData(Entity entity)
+	T * GetData(Entity entity)
 	{
 		assert(mEntityToIndexMap.find(entity) != mEntityToIndexMap.end() && "Retrieving non-existent component.");
 
@@ -66,7 +66,7 @@ public:
 	}
 
 private:
-	std::vector<T> mComponentVector{};
+	std::vector<T*> mComponentVector{};
 	std::unordered_map<Entity, size_t> mEntityToIndexMap{};
 	std::unordered_map<size_t, Entity> mIndexToEntityMap{};
 	size_t mSize{};

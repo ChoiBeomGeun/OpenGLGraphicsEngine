@@ -1,11 +1,10 @@
 #pragma once
 
 #include "ComponentVector.hpp"
-#include "Types.h"
+#include "Types.hpp"
 #include <any>
 #include <memory>
 #include <unordered_map>
-
 
 class ComponentManager
 {
@@ -34,9 +33,14 @@ public:
 	}
 
 	template<typename T>
-	void AddComponent(Entity entity, T component)
+	void AddComponent(Entity entity, T * component)
 	{
-		GetComponentVector<T>()->InsertData(entity, component);
+		auto comVec = GetComponentVector<T>();
+
+		if (comVec != nullptr)
+		{
+			comVec->InsertData(entity, component);
+		}
 	}
 
 	template<typename T>
@@ -46,8 +50,13 @@ public:
 	}
 
 	template<typename T>
-	T& GetComponent(Entity entity)
+	T * GetComponent(Entity entity)
 	{
+		auto cv = GetComponentVector<T>();
+		if (cv == nullptr)
+		{
+			return nullptr;
+		}
 		return GetComponentVector<T>()->GetData(entity);
 	}
 
@@ -72,7 +81,11 @@ private:
 	{
 		const char* typeName = typeid(T).name();
 
-		assert(mComponentTypes.find(typeName) != mComponentTypes.end() && "Component not registered before use.");
+		if (mComponentTypes.find(typeName) == mComponentTypes.end())
+		{
+			std::cout << "Component is not found. Type Name is :" << typeName;
+			return nullptr;
+		}
 
 		return std::static_pointer_cast<ComponentVector<T>>(mComponentVectors[typeName]);
 	}

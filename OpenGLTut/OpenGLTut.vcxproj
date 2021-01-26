@@ -28,13 +28,13 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
@@ -155,13 +155,15 @@
     <ClCompile Include="external\imgui\imgui_impl_opengl3.cpp" />
     <ClCompile Include="external\imgui\imgui_widgets.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Model.cpp" />
     <ClCompile Include="Object.cpp" />
-    <ClCompile Include="Shader.h" />
+    <ClCompile Include="RendererSystem.cpp" />
+    <ClCompile Include="Shader.hpp" />
     <ClCompile Include="Transform.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Camera.h" />
-    <ClInclude Include="Component.h" />
+    <ClInclude Include="Camera.hpp" />
+    <ClInclude Include="Component.hpp" />
     <ClInclude Include="ComponentManager.hpp" />
     <ClInclude Include="ComponentVector.hpp" />
     <ClInclude Include="Coordinator.hpp" />
@@ -174,15 +176,14 @@
     <ClInclude Include="external\imgui\imstb_rectpack.h" />
     <ClInclude Include="external\imgui\imstb_textedit.h" />
     <ClInclude Include="external\imgui\imstb_truetype.h" />
-    <ClInclude Include="Mesh.h" />
-    <ClInclude Include="ModelE.h" />
+    <ClInclude Include="Mesh.hpp" />
+    <ClInclude Include="Model.hpp" />
     <ClInclude Include="Object.h" />
-    <ClInclude Include="RenderSystem.cpp" />
-    <ClInclude Include="RenderSystem.h" />
+    <ClInclude Include="RendererSystem.hpp" />
     <ClInclude Include="System.hpp" />
     <ClInclude Include="SystemManager.hpp" />
-    <ClInclude Include="Transform.h" />
-    <ClInclude Include="Types.h" />
+    <ClInclude Include="Transform.hpp" />
+    <ClInclude Include="Types.hpp" />
     <ClInclude Include="Utility.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
