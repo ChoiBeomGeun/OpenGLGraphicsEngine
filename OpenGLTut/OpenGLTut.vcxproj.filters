@@ -51,9 +51,6 @@
     <ClCompile Include="external\glad.c">
       <Filter>소스 파일\Imgui</Filter>
     </ClCompile>
-    <ClCompile Include="Object.cpp">
-      <Filter>소스 파일\Core</Filter>
-    </ClCompile>
     <ClCompile Include="Transform.cpp">
       <Filter>소스 파일\Core</Filter>
     </ClCompile>
@@ -65,6 +62,12 @@
     </ClCompile>
     <ClCompile Include="Model.cpp">
       <Filter>소스 파일\Core\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject.cpp">
+      <Filter>소스 파일\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="IMGUISystem.cpp">
+      <Filter>소스 파일\Core\Systems</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -91,9 +94,6 @@
     </ClInclude>
     <ClInclude Include="external\imgui\imstb_truetype.h">
       <Filter>소스 파일\Imgui</Filter>
-    </ClInclude>
-    <ClInclude Include="Object.h">
-      <Filter>소스 파일\Core</Filter>
     </ClInclude>
     <ClInclude Include="Utility.hpp">
       <Filter>소스 파일\Core</Filter>
@@ -136,6 +136,12 @@
     </ClInclude>
     <ClInclude Include="Model.hpp">
       <Filter>소스 파일\Core\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject.hpp">
+      <Filter>소스 파일\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="IMGUISystem.hpp">
+      <Filter>소스 파일\Core\Systems</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

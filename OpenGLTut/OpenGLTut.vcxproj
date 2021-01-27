@@ -154,9 +154,10 @@
     <ClCompile Include="external\imgui\imgui_impl_glfw.cpp" />
     <ClCompile Include="external\imgui\imgui_impl_opengl3.cpp" />
     <ClCompile Include="external\imgui\imgui_widgets.cpp" />
+    <ClCompile Include="IMGUISystem.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Model.cpp" />
-    <ClCompile Include="Object.cpp" />
+    <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="RendererSystem.cpp" />
     <ClCompile Include="Shader.hpp" />
     <ClCompile Include="Transform.cpp" />
@@ -176,9 +177,10 @@
     <ClInclude Include="external\imgui\imstb_rectpack.h" />
     <ClInclude Include="external\imgui\imstb_textedit.h" />
     <ClInclude Include="external\imgui\imstb_truetype.h" />
+    <ClInclude Include="IMGUISystem.hpp" />
     <ClInclude Include="Mesh.hpp" />
     <ClInclude Include="Model.hpp" />
-    <ClInclude Include="Object.h" />
+    <ClInclude Include="GameObject.hpp" />
     <ClInclude Include="RendererSystem.hpp" />
     <ClInclude Include="System.hpp" />
     <ClInclude Include="SystemManager.hpp" />

@@ -5,7 +5,7 @@
 #include <any>
 #include <memory>
 #include <unordered_map>
-
+#include <iostream>
 class ComponentManager
 {
 public:
