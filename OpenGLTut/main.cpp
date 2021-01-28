@@ -77,7 +77,7 @@ int main()
         coordinator.RegisterComponent<Camera>();
         coordinator.RegisterComponent<Transform>();
         coordinator.RegisterComponent<Model>();
-        Entity entity = coordinator.CreateEntity();
+        Entity entity = coordinator.CreateEntity("Model");
         Transform tr = Transform{
             glm::vec3(0,0,0),
             glm::vec3(0,0,0),

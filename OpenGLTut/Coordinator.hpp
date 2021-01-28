@@ -20,9 +20,9 @@ public:
 
 
 	// Entity methods
-	Entity CreateEntity()
+	Entity CreateEntity(string name = "")
 	{
-		return mEntityManager->CreateEntity();
+		return mEntityManager->CreateEntity(name);
 	}
 
 	void DestroyEntity(Entity entity)
@@ -79,6 +79,12 @@ public:
 	{
 		mSystemManager->AddEntityToSystem<T>(entity);
 	}
+
+	string GetEntityName(Entity entity)
+	{
+		return mEntityManager->GetEntityName(entity);
+	}
+
 
 private:
 	std::unique_ptr<ComponentManager> mComponentManager;

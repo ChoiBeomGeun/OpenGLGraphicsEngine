@@ -4,6 +4,7 @@
 #include "Transform.hpp"
 #include "Camera.hpp"
 #include "Coordinator.hpp"
+#include "IMGUISystem.hpp"
 extern Coordinator coordinator;
 
 Camera  * mainCam= new Camera(glm::vec3(0.0f, 0.0f, 3.0f));
@@ -12,16 +13,15 @@ void RendererSystem::Init()
 {
 	this->shader = std::make_unique<Shader>("Resources/vertexShader.vs", "Resources/fragmentShader.fs"); 
 
-	mMainCamera = coordinator.CreateEntity();
+	mMainCamera = coordinator.CreateEntity("Camera");
 	auto tr = Transform{
 		glm::vec3(0,0,0),
 	   glm::vec3(0,0,0),
 	   glm::vec3(1,1,1)
 	};
 	coordinator.AddComponent(mMainCamera, &tr);
-
 	coordinator.AddComponent(mMainCamera,&mainCam);
-	
+	coordinator.AddEntityToSystem<IMGUISystem>(mMainCamera);
 //	mainCam = coordinator.GetComponent<Camera>(mMainCamera);
 
 }

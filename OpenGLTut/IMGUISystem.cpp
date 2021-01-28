@@ -6,6 +6,10 @@
 #include "Coordinator.hpp"
 
 extern Coordinator coordinator;
+
+void GlmVecDragFloat3View(const char * text,glm::vec3& vec);
+void TransformView(Transform& tr);
+void MainMenuView();
 void IMGUISystem::Init(GLFWwindow* window, const char* version)
 {
     IMGUI_CHECKVERSION();
@@ -25,62 +29,87 @@ void IMGUISystem::Init(GLFWwindow* window, const char* version)
 
 void IMGUISystem::Update(float dt)
 {
-    for (auto const& entity : mEntities)
+    bool show_demo_window = true;
+    bool show_another_window = false;
+    // Start the Dear ImGui frame
+    ImGui_ImplOpenGL3_NewFrame();
+    ImGui_ImplGlfw_NewFrame();
+    ImGui::NewFrame();
+    if (show_demo_window)
+        ImGui::ShowDemoWindow(&show_demo_window);
+    MainMenuView();
+    ImGui::Begin("Object");
+    if (ImGui::CollapsingHeader("ObjectList"))
     {
-        // Poll and handle events (inputs, window resize, etc.)
-         // You can read the io.WantCaptureMouse, io.WantCaptureKeyboard flags to tell if dear imgui wants to use your inputs.
-         // - When io.WantCaptureMouse is true, do not dispatch mouse input data to your main application.
-         // - When io.WantCaptureKeyboard is true, do not dispatch keyboard input data to your main application.
-         // Generally you may always pass all inputs to dear imgui, and hide them from your application based on those two flags.
-        bool show_demo_window = true;
-        bool show_another_window = false;
-        // Start the Dear ImGui frame
-        ImGui_ImplOpenGL3_NewFrame();
-        ImGui_ImplGlfw_NewFrame();
-        ImGui::NewFrame();
+        char searchText[128] = "";
+        ImGui::InputText("Search", searchText, ((int)(sizeof(searchText) / sizeof(*(searchText)))));
 
-        // 1. Show the big demo window (Most of the sample code is in ImGui::ShowDemoWindow()! You can browse its code to learn more about Dear ImGui!).
-        if (show_demo_window)
-            ImGui::ShowDemoWindow(&show_demo_window);
-        const auto transform = coordinator.GetComponent<Transform>(entity);
-        // 2. Show a simple window that we create ourselves. We use a Begin/End pair to created a named window.
+        for (auto const& entity : mEntities)
         {
-            static float f = 0.0f;
-            static int counter = 0;
-
-            ImGui::Begin("Hello, world!");                          // Create a window called "Hello, world!" and append into it.
-
-            if (transform != nullptr)
+            std::string entityName = coordinator.GetEntityName(entity);
+            if (searchText != "")
             {
-                auto a = std::to_string(entity);
-                ImGui::Text(a.c_str());
-                float vec3f[3] = { transform->position.x,transform->position.y,transform->position.z };
-              
-                ImGui::DragFloat3("Position", vec3f, 1, -1000000, 1000000);
-
-                transform->position = glm::vec3(vec3f[0], vec3f[1], vec3f[2]);
+                if (entityName.find(searchText) == std::string::npos)
+                    continue;
             }
 
-            ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
-            ImGui::End();
-        }
+            auto transform = coordinator.GetComponent<Transform>(entity);
 
-        // 3. Show another simple window.
-        if (show_another_window)
+            if (ImGui::TreeNode(entityName.c_str()))
+            {
+                if (transform != nullptr)
+                {
+                    TransformView(*transform);
+                }
+                ImGui::TreePop();
+            }
+        }
+    }
+
+    if (ImGui::CollapsingHeader("DebugInfos"))
+    {
+        ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
+    }
+
+    ImGui::End();
+    ImGui::Render();
+
+    ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+}
+
+void MainMenuView()
+{
+    if (ImGui::BeginMainMenuBar())
+    {
+        if (ImGui::BeginMenu("Edit"))
         {
-            ImGui::Begin("Another Window", &show_another_window);   // Pass a pointer to our bool variable (the window will have a closing button that will clear the bool when clicked)
-            ImGui::Text("Hello from another window!");
-            if (ImGui::Button("Close Me"))
-                show_another_window = false;
-            ImGui::End();
+            if (ImGui::MenuItem("Undo", "CTRL+Z")) {}
+            if (ImGui::MenuItem("Redo", "CTRL+Y", false, false)) {}  // Disabled item
+            ImGui::Separator();
+            if (ImGui::MenuItem("Cut", "CTRL+X")) {}
+            if (ImGui::MenuItem("Copy", "CTRL+C")) {}
+            if (ImGui::MenuItem("Paste", "CTRL+V")) {}
+            ImGui::EndMenu();
         }
-
-        // Rendering
-        ImGui::Render();
-
-        ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+        ImGui::EndMainMenuBar();
     }
 }
 
+void TransformView(Transform & tr)
+{
+    GlmVecDragFloat3View("Position", tr.position);
+    GlmVecDragFloat3View("Scale", tr.scale);
+    GlmVecDragFloat3View("Rotation", tr.rotation);
+}
+
+
+void GlmVecDragFloat3View(const char * text,glm::vec3 & vec)
+{
+    float vec3f[3] = { vec.x,vec.y,vec.z };
+
+    ImGui::DragFloat3(text, vec3f, 0.01f, -1000000, 1000000);
+
+    vec = glm::vec3(vec3f[0], vec3f[1], vec3f[2]);
+}
 
 #endif
