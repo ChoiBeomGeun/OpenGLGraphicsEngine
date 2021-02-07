@@ -19,13 +19,13 @@ public:
     vector<Mesh>    meshes;
     string directory;
     bool gammaCorrection;
-
+    std::unique_ptr<Shader> shader;
     // constructor, expects a filepath to a 3D model.
     Model(string const& path, bool gamma = false) : gammaCorrection(gamma)
     {
         loadModel(path);
     }
-    void Draw(Shader& shader);
+    void Draw();
 
 private:
 
@@ -33,6 +33,6 @@ private:
     void processNode(aiNode* node, const aiScene* scene);
     Mesh processMesh(aiMesh* mesh, const aiScene* scene);
     vector<Texture> loadMaterialTextures(aiMaterial* mat, aiTextureType type, string typeName);
-    unsigned int TextureFromFile(const char* path, const string& directory, bool gamma);
+
 };
 

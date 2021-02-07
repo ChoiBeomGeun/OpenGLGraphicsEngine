@@ -1,7 +1,9 @@
 #pragma once
+
 #include<string>
 #include <fstream>
 #include <iostream>
+
  class Utility
 {
 public:
@@ -21,4 +23,9 @@ public:
 		file.close(); 
 		return returnString;
 	}
-};
+
+	static unsigned int TextureFromFile(const char* path, const std::string& directory, bool gamma);
+
+
+
+ };

@@ -63,11 +63,11 @@
     <ClCompile Include="Model.cpp">
       <Filter>소스 파일\Core\Graphics</Filter>
     </ClCompile>
-    <ClCompile Include="GameObject.cpp">
-      <Filter>소스 파일\Core</Filter>
-    </ClCompile>
     <ClCompile Include="IMGUISystem.cpp">
       <Filter>소스 파일\Core\Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="Utility.cpp">
+      <Filter>소스 파일\Core</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -94,9 +94,6 @@
     </ClInclude>
     <ClInclude Include="external\imgui\imstb_truetype.h">
       <Filter>소스 파일\Imgui</Filter>
-    </ClInclude>
-    <ClInclude Include="Utility.hpp">
-      <Filter>소스 파일\Core</Filter>
     </ClInclude>
     <ClInclude Include="EntityManager.hpp">
       <Filter>소스 파일\Core\Systems</Filter>
@@ -137,11 +134,14 @@
     <ClInclude Include="Model.hpp">
       <Filter>소스 파일\Core\Graphics</Filter>
     </ClInclude>
-    <ClInclude Include="GameObject.hpp">
-      <Filter>소스 파일\Core</Filter>
-    </ClInclude>
     <ClInclude Include="IMGUISystem.hpp">
       <Filter>소스 파일\Core\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="Light.hpp">
+      <Filter>소스 파일\Core\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Utility.hpp">
+      <Filter>소스 파일\Imgui</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

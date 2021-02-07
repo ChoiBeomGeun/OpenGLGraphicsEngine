@@ -157,10 +157,10 @@
     <ClCompile Include="IMGUISystem.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Model.cpp" />
-    <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="RendererSystem.cpp" />
     <ClCompile Include="Shader.hpp" />
     <ClCompile Include="Transform.cpp" />
+    <ClCompile Include="Utility.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera.hpp" />
@@ -178,9 +178,9 @@
     <ClInclude Include="external\imgui\imstb_textedit.h" />
     <ClInclude Include="external\imgui\imstb_truetype.h" />
     <ClInclude Include="IMGUISystem.hpp" />
+    <ClInclude Include="Light.hpp" />
     <ClInclude Include="Mesh.hpp" />
     <ClInclude Include="Model.hpp" />
-    <ClInclude Include="GameObject.hpp" />
     <ClInclude Include="RendererSystem.hpp" />
     <ClInclude Include="System.hpp" />
     <ClInclude Include="SystemManager.hpp" />

@@ -85,6 +85,10 @@ public:
 		return mEntityManager->GetEntityName(entity);
 	}
 
+	Entity GetEntityByName(string name)
+	{
+		return mEntityManager->GetEntityByName(name);
+	}
 
 private:
 	std::unique_ptr<ComponentManager> mComponentManager;

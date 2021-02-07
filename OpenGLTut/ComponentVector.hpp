@@ -4,7 +4,7 @@
 #include <array>
 #include <cassert>
 #include <unordered_map>
-
+#include <iostream>
 
 class IComponentVector
 {
@@ -52,8 +52,10 @@ public:
 
 	T * GetData(Entity entity)
 	{
-		assert(mEntityToIndexMap.find(entity) != mEntityToIndexMap.end() && "Retrieving non-existent component.");
-
+		if (mEntityToIndexMap.find(entity) == mEntityToIndexMap.end())
+		{
+			return nullptr;
+		}
 		return mComponentVector[mEntityToIndexMap[entity]];
 	}
 

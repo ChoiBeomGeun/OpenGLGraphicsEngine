@@ -1,3 +1,4 @@
+#pragma once
 #include "System.hpp"
 #include "external/imgui/imgui_impl_glfw.h"
 

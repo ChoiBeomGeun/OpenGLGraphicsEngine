@@ -18,7 +18,12 @@ public:
 	Entity CreateEntity(string name = "")
 	{
 		_curid++;
-		mEntityNameMap[_curid] = (name == "") ? std::to_string(_curid) : name;
+		if (name == "")
+		{
+			name = std::to_string(_curid);
+		}
+		mEntityNameMap[_curid] = name;
+		mEntityMap[name] = _curid;
 		return _curid;
 	}
 
@@ -35,8 +40,14 @@ public:
 		return mEntityNameMap[entity];
 	}
 
+	Entity GetEntityByName(string name)
+	{
+		return mEntityMap[name];
+	}
+
 private:
 	std::queue<Entity> mAvailableEntities{};
 	uint32_t mLivingEntityCount{};
 	std::unordered_map<Entity, string> mEntityNameMap;
+	std::unordered_map<string, Entity> mEntityMap;
 };
